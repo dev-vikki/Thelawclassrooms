@@ -66,7 +66,9 @@ export default function UserInfoPage() {
 
     setLoading(true);
     try {
-      let uploadedAvatarUrl = avatarUrl;
+      let uploadedAvatarUrl: string | null = null;
+
+      // let uploadedAvatarUrl = avatarUrl;
 
       if (avatarFile) {
         uploadedAvatarUrl = await uploadAvatar();

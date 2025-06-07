@@ -221,7 +221,7 @@ export default function LoginPage() {
           )}
 
           {/* Footer */}
-          <p className="text-center text-sm text-gray-300">
+          <div className="text-center text-sm text-gray-300">
             New user?{" "}
             <button
               className="text-[#c58026] hover:text-[#ffdd1b] underline font-medium transition-all"
@@ -235,7 +235,7 @@ export default function LoginPage() {
               By using our services you are agreeing to our{" "}
               <span className="text-[#ffc74e]">Terms and Conditions</span>
             </p>
-          </p>
+          </div>
         </div>
       </div>
     </div>
