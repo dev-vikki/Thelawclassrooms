@@ -160,14 +160,14 @@ export default function LoginPage() {
               <input
                 type="email"
                 placeholder="Email"
-                className="w-full px-4 py-2 border bg-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fffb1b] transition-all text-black"
+                className="w-full px-4 py-2 border bg-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fffb1b] transition-all text-white"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
               <input
                 type="password"
                 placeholder="Password"
-                className="w-full px-4 py-2 border bg-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fffb1b] transition-all text-black"
+                className="w-full px-4 py-2 border bg-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fffb1b] transition-all text-white"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -187,7 +187,7 @@ export default function LoginPage() {
               <input
                 type="text"
                 placeholder="+91xxxxxxxxxx"
-                className="w-full px-4 py-2 border bg-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fffb1b] transition-all text-black"
+                className="w-full px-4 py-2 text-white border bg-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fffb1b] transition-all"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
               />
@@ -204,7 +204,7 @@ export default function LoginPage() {
                   <input
                     type="text"
                     placeholder="Enter OTP"
-                    className="w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                    className="w-full mt-2 px-4 py-2 border border-gray-300 text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                     value={otp}
                     onChange={(e) => setOtp(e.target.value)}
                   />
