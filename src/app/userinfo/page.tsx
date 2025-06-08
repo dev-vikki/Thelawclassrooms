@@ -4,6 +4,16 @@ import { useState, useEffect, ChangeEvent } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import { useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
+import Image from 'next/image';
+
+type Profile = {
+  id: string;
+  full_name: string;
+  username: string;
+  phone?: string;
+  avatar_url?: string;
+  updated_at?: string;
+};
 
 export default function UserInfoPage() {
   const router = useRouter();
@@ -27,7 +37,12 @@ export default function UserInfoPage() {
   }, [router]);
 
   async function checkProfile(userId: string) {
-    const { data } = await supabase.from('profiles').select('*').eq('id', userId).single();
+    const { data } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', userId)
+      .single();
+
     if (data && data.full_name && data.username) {
       router.push('/dashboard');
     }
@@ -41,8 +56,9 @@ export default function UserInfoPage() {
 
   const uploadAvatar = async () => {
     if (!avatarFile || !session) return null;
+
     const fileExt = avatarFile.name.split('.').pop();
-    const fileName = `${session.user.id}/${uuidv4()}.${fileExt}`;
+    const fileName = `${session.id}/${uuidv4()}.${fileExt}`;
     const filePath = `avatars/${fileName}`;
 
     const { error: uploadError } = await supabase.storage
@@ -54,7 +70,10 @@ export default function UserInfoPage() {
 
     if (uploadError) throw uploadError;
 
-    const { data: publicUrlData } = supabase.storage.from('avatars').getPublicUrl(filePath);
+    const { data: publicUrlData } = supabase.storage
+      .from('avatars')
+      .getPublicUrl(filePath);
+
     return publicUrlData.publicUrl;
   };
 
@@ -68,23 +87,23 @@ export default function UserInfoPage() {
     try {
       let uploadedAvatarUrl: string | null = null;
 
-      // let uploadedAvatarUrl = avatarUrl;
-
       if (avatarFile) {
         uploadedAvatarUrl = await uploadAvatar();
         if (!uploadedAvatarUrl) throw new Error('Failed to upload profile picture');
       }
 
-      const updates = {
+      const updates: Profile = {
         id: session.id,
         full_name: fullName,
         username,
         phone,
-        avatar_url: uploadedAvatarUrl,
+        avatar_url: uploadedAvatarUrl || '',
         updated_at: new Date().toISOString(),
       };
 
       const { error } = await supabase.from('profiles').upsert(updates);
+
+
       if (error) throw error;
 
       router.push('/dashboard');
@@ -95,57 +114,62 @@ export default function UserInfoPage() {
     }
   };
 
-  if (!session) return <div>Loading...</div>;
+  if (!session) return <div className="text-center text-white mt-20">Loading...</div>;
 
   return (
-    <div className="max-w-md mx-auto p-6 mt-12 bg-white rounded shadow space-y-6">
-      <h1 className="text-3xl font-bold text-center">Complete Your Profile</h1>
+    <div className="min-h-screen bg-[#0e0e0e] text-white flex items-center justify-center px-4">
+      <div className="w-full max-w-md bg-[#1a1a1a] rounded-xl p-6 shadow-lg space-y-6">
+        <h1 className="text-3xl font-bold text-center">Complete Your Profile</h1>
 
-      <input
-        type="text"
-        placeholder="Full Name"
-        value={fullName}
-        onChange={(e) => setFullName(e.target.value)}
-        className="w-full p-2 border rounded"
-      />
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        className="w-full p-2 border rounded"
-      />
-      <input
-        type="text"
-        placeholder="Contact Number"
-        value={phone}
-        onChange={(e) => setPhone(e.target.value)}
-        className="w-full p-2 border rounded"
-      />
-      <div>
-        <label className="block mb-1 font-medium">Profile Picture</label>
         <input
-          type="file"
-          accept="image/*"
-          onChange={handleFileChange}
-          className="w-full mb-2"
+          type="text"
+          placeholder="Full Name"
+          value={fullName}
+          onChange={(e) => setFullName(e.target.value)}
+          className="w-full p-3 bg-[#2a2a2a] text-white border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
-        {avatarFile && (
-          <img
-            src={URL.createObjectURL(avatarFile)}
-            alt="Preview"
-            className="h-24 w-24 rounded-full object-cover mt-2"
-          />
-        )}
-      </div>
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          className="w-full p-3 bg-[#2a2a2a] text-white border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <input
+          type="text"
+          placeholder="Phone Number"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          className="w-full p-3 bg-[#2a2a2a] text-white border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
 
-      <button
-        onClick={handleSave}
-        disabled={loading}
-        className="w-full bg-blue-600 text-white py-3 rounded font-semibold"
-      >
-        {loading ? 'Saving...' : 'Save Profile'}
-      </button>
+        <div>
+          <label className="block mb-2 font-medium">Profile Picture</label>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleFileChange}
+            className="w-full bg-[#2a2a2a] text-white"
+          />
+          {avatarFile && (
+            <Image
+              src={URL.createObjectURL(avatarFile)}
+              alt="Avatar Preview"
+              width={96}
+              height={96}
+              className="rounded-full mt-3 border border-gray-600 object-cover"
+            />
+          )}
+        </div>
+
+        <button
+          onClick={handleSave}
+          disabled={loading}
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded font-semibold transition"
+        >
+          {loading ? 'Saving...' : 'Save Profile'}
+        </button>
+      </div>
     </div>
   );
 }

@@ -1,3 +1,8 @@
 {
-  "/login/page": "app/login/page.js"
+  "/page": "app/page.js",
+  "/login/page": "app/login/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/dashboard/notes/page": "app/dashboard/notes/page.js",
+  "/dashboard/state-pyqs/page": "app/dashboard/state-pyqs/page.js",
+  "/dashboard/subjects/page": "app/dashboard/subjects/page.js"
 }

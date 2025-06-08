@@ -7,16 +7,16 @@ import {
   BookOpen,
   GraduationCap,
   School,
-  Video,
-  Briefcase,
   Phone,
   ChevronDown,
 } from "lucide-react";
 import Link from "next/link";
+import { useAuth } from "@/lib/useAuth";
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLawzzleOpen, setIsLawzzleOpen] = useState(false);
+  const { user } = useAuth(); // Supabase auth user
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const toggleLawzzle = () => setIsLawzzleOpen(!isLawzzleOpen);
@@ -48,7 +48,7 @@ const Navbar: React.FC = () => {
               label="MCQ Corner"
             />
 
-            {/* Lawzzle Dropdown */}
+            {/* Dropdown */}
             <div className="relative group">
               <button
                 onClick={toggleLawzzle}
@@ -96,21 +96,32 @@ const Navbar: React.FC = () => {
             >
               Internship
             </Link>
-            <Link
-              href="/login"
-              className="relative border-light-effect px-4 py-2 rounded text-white bg-transparent transition-all"
-              style={{
-                ["--color1" as any]: "#00cfff",
-                ["--color2" as any]: "#0055ff",
-                ["--color3" as any]: "#002244",
-                ["--color4" as any]: "#00cfff",
-              }}
-            >
-              LOGIN
-            </Link>
+
+            {/* Auth-Aware Button */}
+            {user ? (
+              <Link
+                href="/dashboard"
+                className="relative px-4 py-2 rounded text-white bg-green-600 hover:bg-green-700 transition-all"
+              >
+                Dashboard
+              </Link>
+            ) : (
+              <Link
+                href="/login"
+                className="relative border-light-effect px-4 py-2 rounded text-white bg-transparent transition-all"
+                style={{
+                  ["--color1" as any]: "#00cfff",
+                  ["--color2" as any]: "#0055ff",
+                  ["--color3" as any]: "#002244",
+                  ["--color4" as any]: "#00cfff",
+                }}
+              >
+                LOGIN
+              </Link>
+            )}
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Button */}
           <button className="md:hidden text-white" onClick={toggleMenu}>
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -130,8 +141,6 @@ const Navbar: React.FC = () => {
                 icon={<BookOpen size={20} />}
                 label="MCQ Corner"
               />
-
-              {/* Mobile Dropdown for Lawzzle */}
               <div>
                 <button
                   onClick={toggleLawzzle}
@@ -161,7 +170,6 @@ const Navbar: React.FC = () => {
                   </div>
                 )}
               </div>
-
               <MobileNavItem
                 href="/schools"
                 icon={<School size={20} />}
@@ -172,8 +180,6 @@ const Navbar: React.FC = () => {
                 icon={<Phone size={20} />}
                 label="Contact Us"
               />
-
-              {/* Mobile Buttons */}
               <div className="pt-4 flex flex-col space-y-3">
                 <Link
                   href="/internship"
@@ -181,12 +187,21 @@ const Navbar: React.FC = () => {
                 >
                   Internship
                 </Link>
-                <Link
-                  href="/signin"
-                  className="px-4 py-2 bg-burgundy-600 rounded text-center hover:bg-burgundy-700 transition-colors"
-                >
-                  LOGIN
-                </Link>
+                {user ? (
+                  <Link
+                    href="/dashboard"
+                    className="px-4 py-2 bg-black rounded text-center hover:bg-green-700 transition-colors"
+                  >
+                    Dashboard
+                  </Link>
+                ) : (
+                  <Link
+                    href="/login"
+                    className="px-4 py-2 bg-burgundy-600 rounded text-center hover:bg-burgundy-700 transition-colors"
+                  >
+                    LOGIN
+                  </Link>
+                )}
               </div>
             </div>
           </div>
@@ -199,7 +214,7 @@ const Navbar: React.FC = () => {
 // Reusable Components
 interface NavItemProps {
   href: string;
-  icon: ReactNode;
+  icon?: ReactNode;
   label: string;
 }
 

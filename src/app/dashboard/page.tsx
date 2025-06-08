@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { supabase } from '@/lib/supabaseClient';
-import { CalendarDays, Book, Layers, FileText, LogOut } from 'lucide-react';
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { supabase } from "@/lib/supabaseClient";
+import { CalendarDays, Book, Layers, FileText, LogOut } from "lucide-react";
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -12,7 +12,7 @@ export default function DashboardPage() {
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
       if (!data.session) {
-        router.push('/login');
+        router.push("/login");
       } else {
         setUser(data.session.user);
       }
@@ -25,40 +25,21 @@ export default function DashboardPage() {
 
   return (
     <div className="flex min-h-screen bg-[#0e0e0e] text-white">
-      {/* Sidebar */}
-      <aside className="w-64 bg-gradient-to-b from-yellow-900 to-black p-4">
-        <h2 className="text-2xl font-bold mb-8">THE LAW CLASSROOM</h2>
-        <nav className="space-y-4">
-          <div className="flex items-center gap-2 px-3 py-2 bg-black rounded">
-            <CalendarDays className="w-5 h-5" />
-            Dashboard
-          </div>
-          <div className="flex items-center gap-2 px-3 py-2 hover:bg-gray-800 rounded">
-            <Book className="w-5 h-5" />
-            Subject wise test
-          </div>
-          <div className="flex items-center gap-2 px-3 py-2 hover:bg-gray-800 rounded">
-            <FileText className="w-5 h-5" />
-            Notes
-          </div>
-          <div className="flex items-center gap-2 px-3 py-2 hover:bg-gray-800 rounded">
-            <Layers className="w-5 h-5" />
-            PYQ'S
-          </div>
-        </nav>
-      </aside>
-
       {/* Main Content */}
       <main className="flex-1 p-6 overflow-auto">
         {/* Header */}
         <div className="flex justify-between items-center mb-6">
           <div>
             <h1 className="text-xl font-semibold">My Dashboard</h1>
-            <p className="text-sm text-gray-400">Thursday, 24<sup>th</sup> April, 2025</p>
+            <p className="text-sm text-gray-400">
+              Thursday, 24<sup>th</sup> April, 2025
+            </p>
           </div>
           <div className="flex items-center gap-3">
             <div className="text-right">
-              <p className="text-sm font-semibold">{user.email || user.phone}</p>
+              <p className="text-sm font-semibold">
+                {user.email || user.phone}
+              </p>
               <p className="text-xs text-gray-400">Last seen 38 minutes ago</p>
             </div>
             <div className="w-10 h-10 rounded-full bg-gray-500" />
@@ -70,7 +51,8 @@ export default function DashboardPage() {
           <div>
             <h2 className="text-2xl font-bold">Hey Tejas!</h2>
             <p className="italic text-white mt-1">
-              "Leave the worries behind —<br />let’s conquer those exams together!"
+              "Leave the worries behind —<br />
+              let’s conquer those exams together!"
             </p>
           </div>
           <div className="flex flex-col items-center">
@@ -83,18 +65,26 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* Content Row: Calendar & Courses */}
+        {/* Content Row */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
           {/* Calendar */}
           <div className="bg-[#1a1a1a] p-4 rounded-lg md:col-span-1">
             <h3 className="text-lg font-semibold mb-2">My Progress</h3>
             <div className="text-sm text-gray-400">JULY 2021</div>
             <div className="grid grid-cols-7 gap-1 mt-2 text-center text-xs">
-              <span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span>
+              <span>Mo</span>
+              <span>Tu</span>
+              <span>We</span>
+              <span>Th</span>
+              <span>Fr</span>
+              <span>Sa</span>
+              <span>Su</span>
               {[...Array(28)].map((_, i) => (
                 <div
                   key={i}
-                  className={`h-6 w-6 rounded-full ${i % 5 === 0 ? 'bg-red-600' : 'bg-gray-700'}`}
+                  className={`h-6 w-6 rounded-full ${
+                    i % 5 === 0 ? "bg-red-600" : "bg-gray-700"
+                  }`}
                 ></div>
               ))}
             </div>
@@ -103,9 +93,9 @@ export default function DashboardPage() {
           {/* Courses */}
           <div className="md:col-span-2 grid grid-cols-2 md:grid-cols-3 gap-4">
             {[
-              { title: 'BPSC', color: 'bg-orange-800' },
-              { title: 'HPSC', color: 'bg-gray-700' },
-              { title: 'JPSC', color: 'bg-red-800' },
+              { title: "BPSC", color: "bg-orange-800" },
+              { title: "HPSC", color: "bg-gray-700" },
+              { title: "JPSC", color: "bg-red-800" },
             ].map(({ title, color }, i) => (
               <div key={i} className={`rounded-lg ${color} p-4 text-center`}>
                 <h4 className="font-semibold text-sm mb-2">
@@ -120,11 +110,11 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* Logout Button */}
+        {/* Logout */}
         <button
           onClick={async () => {
             await supabase.auth.signOut();
-            router.push('/login');
+            router.push("/login");
           }}
           className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded"
         >
