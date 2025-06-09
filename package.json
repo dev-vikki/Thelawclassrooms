@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.4",
+    "bcryptjs": "^3.0.2",
     "classnames": "^2.5.1",
     "firebase": "^9.23.0",
     "lucide-react": "^0.344.0",
