@@ -1,6 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.input {
+  @apply w-full px-4 py-2 mb-3 border bg-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all text-white;
+}
 
 /* Base Body Styles */
 body {

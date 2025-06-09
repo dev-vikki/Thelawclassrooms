@@ -18,12 +18,11 @@ export default function RegisterPage() {
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [password, setPassword] = useState("");
-  const [otpSent, setOtpSent] = useState(false);
   const [otp, setOtp] = useState("");
-  const dummyOtp = "123456";
   const [loading, setLoading] = useState(false);
 
-  // Handle avatar preview
+  const [userId, setUserId] = useState<string | null>(null);
+
   const handleAvatarChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setAvatar(e.target.files[0]);
@@ -31,83 +30,112 @@ export default function RegisterPage() {
     }
   };
 
-  // Basic step 1 validations
   const validateStep1 = (): string | null => {
     if (!name.trim()) return "Name is required";
     if (!username.trim()) return "Username is required";
-    if (email && !email.includes("@")) return "Please enter a valid email";
+    if (!email || !email.includes("@")) return "Please enter a valid email";
     if (!phone.trim() || phone.length < 10)
       return "Valid phone number is required";
+    if (!password || password.length < 6)
+      return "Password must be at least 6 characters";
     if (!termsAccepted) return "You must accept the Terms and Conditions";
     return null;
   };
 
-  // Password strength check
-  const isStrongPassword = (pw: string) => {
-    // Min 8 chars, at least 1 uppercase, 1 lowercase, 1 number, 1 special char
-    return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
-      pw
-    );
+  const uploadAvatarToSupabase = async (
+    uid: string
+  ): Promise<string | null> => {
+    if (!avatar) return null;
+    const fileExt = avatar.name.split(".").pop();
+    const filePath = `avatars/${uid}.${fileExt}`;
+    const { error } = await supabase.storage
+      .from("avatars")
+      .upload(filePath, avatar);
+
+    if (error) {
+      console.error("Avatar upload error", error);
+      return null;
+    }
+
+    const { data } = supabase.storage.from("avatars").getPublicUrl(filePath);
+    return data?.publicUrl || null;
   };
 
-  // Step 2 validations: password + OTP
-  const validateStep2 = (): string | null => {
-    if (!password) return "Password is required.";
-    if (!isStrongPassword(password))
-      return "Password must be at least 8 characters, include uppercase, lowercase, number, and special character.";
-    if (otp !== dummyOtp) return "Invalid OTP.";
-    return null;
-  };
-
-  // Proceed to step 2 after step 1 validation and OTP sending
   const proceedToStep2 = () => {
     const error = validateStep1();
     if (error) {
       alert(error);
       return;
     }
-    alert(
-      `Sending OTP to ${
-        email ? `email: ${email}` : `phone: ${phone}`
-      } (Dummy OTP: ${dummyOtp})`
-    );
-    setOtpSent(true);
     setStep(2);
   };
 
-  // Final step: verify OTP & password, then simulate registration success
-  const verifyOtpAndRegister = () => {
-    const error = validateStep2();
-    if (error) {
-      alert(error);
+  const verifyOtpAndRegister = async () => {
+    setLoading(true);
+
+    // 1. Sign up with Supabase Auth
+    const { data: signUpData, error: signUpError } = await supabase.auth.signUp(
+      {
+        email,
+        password,
+      }
+    );
+
+    if (signUpError) {
+      alert("Signup error: " + signUpError.message);
+      setLoading(false);
       return;
     }
 
-    setLoading(true);
-    const newUserId = uuidv4();
-
-    // Simulate backend user creation (replace with actual supabase logic as needed)
-    setTimeout(() => {
+    const uid = signUpData?.user?.id;
+    if (!uid) {
+      alert("Signup failed. User ID missing.");
       setLoading(false);
-      alert(`Registration successful! Your user ID: ${newUserId}`);
-      router.push("/login");
-    }, 1500);
+      return;
+    }
+    setUserId(uid);
+
+    // 2. Upload avatar if exists
+    const avatarUrl = await uploadAvatarToSupabase(uid);
+
+    // 3. Insert user profile into public.users table
+    const { error: insertError } = await supabase.from("users").insert([
+      {
+        id: uid,
+        name,
+        username,
+        email,
+        phone,
+        password, // Storing only for redundancy; not recommended
+        avatar_url: avatarUrl,
+        terms_accepted: termsAccepted,
+      },
+    ]);
+
+    if (insertError) {
+      alert("Database insert error: " + insertError.message);
+      setLoading(false);
+      return;
+    }
+
+    alert(
+      "Registration successful. Please check your email to verify your account."
+    );
+    setLoading(false);
+    router.push("/login");
   };
 
-  // Google OAuth Sign-In
   const handleGoogleSignIn = async () => {
     setLoading(true);
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
     });
-    if (error) {
-      alert(`Google sign-in error: ${error.message}`);
-      setLoading(false);
-    }
+    if (error) alert("Google sign-in error: " + error.message);
+    setLoading(false);
   };
 
   return (
-    <div className="relative min-h-screen bg-[#000000] overflow-hidden flex items-center justify-center">
+    <div className="relative min-h-screen bg-black overflow-hidden flex items-center justify-center">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -153,62 +181,64 @@ export default function RegisterPage() {
             <input
               type="text"
               placeholder="Full Name *"
-              className="w-full px-4 py-2 border bg-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fffb1b] transition-all text-white"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              className="input"
               disabled={loading}
             />
             <input
               type="text"
               placeholder="Username *"
-              className="w-full px-4 py-2 border bg-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fffb1b] transition-all text-white"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              className="input"
               disabled={loading}
             />
             <input
               type="email"
-              placeholder="Email"
-              className="w-full px-4 py-2 border bg-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fffb1b] transition-all text-white"
+              placeholder="Email *"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              className="input"
               disabled={loading}
             />
             <input
               type="text"
               placeholder="+91xxxxxxxxxx *"
-              className="w-full px-4 py-2 border bg-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fffb1b] transition-all text-white"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
+              className="input"
               disabled={loading}
             />
+            <input
+              type="password"
+              placeholder="Password *"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="input"
+              disabled={loading}
+              autoComplete="new-password"
+            />
 
-            <div>
-              <label
-                htmlFor="avatar-upload"
-                className="block mb-1 text-white font-medium cursor-pointer"
-              >
-                Upload Avatar
-              </label>
-              <input
-                id="avatar-upload"
-                type="file"
-                accept="image/*"
-                onChange={handleAvatarChange}
-                className="text-white"
-                disabled={loading}
+            <label className="block text-white font-medium mt-3">
+              Upload Avatar
+            </label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleAvatarChange}
+              className="text-white"
+              disabled={loading}
+            />
+            {avatarPreview && (
+              <img
+                src={avatarPreview}
+                alt="Preview"
+                className="mt-2 w-20 h-20 rounded-full object-cover"
               />
+            )}
 
-              {avatarPreview && (
-                <img
-                  src={avatarPreview}
-                  alt="Avatar Preview"
-                  className="mt-2 w-20 h-20 rounded-full object-cover border border-gray-300"
-                />
-              )}
-            </div>
-
-            <label className="flex items-center gap-2 text-white select-none">
+            <label className="flex items-center gap-2 text-white mt-2">
               <input
                 type="checkbox"
                 checked={termsAccepted}
@@ -216,7 +246,7 @@ export default function RegisterPage() {
                 disabled={loading}
               />
               I accept the{" "}
-              <span className="text-[#ffc74e] cursor-pointer underline">
+              <span className="text-yellow-400 underline cursor-pointer">
                 Terms and Conditions
               </span>
             </label>
@@ -224,7 +254,7 @@ export default function RegisterPage() {
             <button
               onClick={proceedToStep2}
               disabled={loading || !termsAccepted}
-              className="w-full bg-[#000] cursor-pointer hover:bg-[#ff9f10] text-white py-3 rounded-lg font-semibold transition-all shadow disabled:opacity-50"
+              className="w-full bg-[#000] hover:bg-[#ff9f10] text-white py-3 rounded-lg font-semibold transition-all shadow disabled:opacity-50"
             >
               Next
             </button>
@@ -238,65 +268,23 @@ export default function RegisterPage() {
               verifyOtpAndRegister();
             }}
             noValidate
-            aria-describedby="step2-desc"
           >
-            <p
-              id="step2-desc"
-              className="text-yellow-400 text-center mb-4"
-              aria-live="polite"
-            >
-              Enter the OTP sent to your {email ? "email" : "phone"}.
-              <br />
-              (Use OTP: {dummyOtp})
+            <p className="text-yellow-400 text-center mb-4">
+              Verify your account by clicking the link sent to your email.
             </p>
-
-            <input
-              type="text"
-              name="otp"
-              id="otp"
-              placeholder="Enter OTP"
-              className="w-full px-4 py-2 mb-3 border bg-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fffb1b] transition-all text-white"
-              value={otp}
-              onChange={(e) => setOtp(e.target.value)}
-              disabled={loading}
-              inputMode="numeric"
-              pattern="[0-9]*"
-              required
-              aria-required="true"
-            />
-
-            <input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="Password *"
-              className="w-full px-4 py-2 mb-4 border bg-black border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fffb1b] transition-all text-white"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              disabled={loading}
-              autoComplete="new-password"
-              required
-              aria-required="true"
-            />
 
             <button
               type="submit"
-              disabled={loading || otp.length === 0}
+              disabled={loading}
               className="w-full bg-[#000] hover:bg-[#ff9f10] text-white py-3 rounded-lg font-semibold transition-all shadow disabled:opacity-50"
-              aria-disabled={loading || otp.length === 0}
             >
-              {loading ? "Verifying..." : "Complete Registration"}
+              {loading ? "Registering..." : "Complete Registration"}
             </button>
 
             <button
               type="button"
-              onClick={() => {
-                setStep(1);
-                setOtpSent(false);
-                setOtp("");
-              }}
-              disabled={loading}
-              className="w-full mt-3 bg-gray-700 hover:bg-gray-600 text-white py-2 rounded-lg font-semibold transition-all"
+              onClick={() => setStep(1)}
+              className="w-full mt-3 bg-gray-700 hover:bg-gray-600 text-white py-2 rounded-lg font-semibold"
             >
               Back
             </button>
@@ -306,9 +294,8 @@ export default function RegisterPage() {
         <div className="text-center text-sm text-gray-300 mt-6">
           Already have an account?{" "}
           <button
-            className="text-[#c58026] hover:text-[#ffdd1b] underline font-medium transition-all"
+            className="text-[#c58026] hover:text-[#ffdd1b] underline font-medium"
             onClick={() => router.push("/login")}
-            disabled={loading}
           >
             Login here
           </button>
