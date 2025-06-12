@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
   const toggleLawzzle = () => setIsLawzzleOpen(!isLawzzleOpen);
 
   return (
-    <nav className="bg-black text-white py-4 px-4 md:px-8 font-oswald">
+    <nav className="bg-black text-white py-4 px-4 md:px-8 font-poppins">
       <div className="mx-auto">
         <div className="flex items-center justify-between">
           {/* Logo */}
