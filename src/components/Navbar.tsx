@@ -13,10 +13,36 @@ import {
 import Link from "next/link";
 import { useAuth } from "@/lib/useAuth";
 
+interface NavItemProps {
+  href: string;
+  icon?: ReactNode;
+  label: string;
+}
+
+const NavItem = ({ href, icon, label }: NavItemProps) => (
+  <Link
+    href={href}
+    className="flex items-center space-x-2 hover:text-gold-400 transition-colors px-3 py-2 rounded-md hover:bg-navy-800"
+  >
+    {icon}
+    <span>{label}</span>
+  </Link>
+);
+
+const MobileNavItem = ({ href, icon, label }: NavItemProps) => (
+  <Link
+    href={href}
+    className="flex items-center space-x-2 hover:text-gold-400 transition-colors"
+  >
+    {icon}
+    <span>{label}</span>
+  </Link>
+);
+
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLawzzleOpen, setIsLawzzleOpen] = useState(false);
-  const { user } = useAuth(); // Supabase auth user
+  const { user } = useAuth();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const toggleLawzzle = () => setIsLawzzleOpen(!isLawzzleOpen);
@@ -33,7 +59,7 @@ const Navbar: React.FC = () => {
                 alt="Logo"
                 className="object-contain w-[35px] h-[35px] md:w-[80px] md:h-[60px]"
               />
-              <span className="text-2xl font-light">
+              <span className=" font-light">
                 The <span className="text-gold-500">Law</span> Classrooms
               </span>
             </Link>
@@ -41,51 +67,32 @@ const Navbar: React.FC = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
-            <NavItem href="/" icon={<BookOpen size={20} />} label="Home" />
-            <NavItem
-              href="/books"
-              icon={<BookOpen size={20} />}
-              label="MCQ Corner"
-            />
+            <NavItem href="/" icon={<BookOpen size={12} />} label="Home" />
+            <NavItem href="/books" icon={<BookOpen size={12} />} label="MCQ Corner" />
 
-            {/* Dropdown */}
             <div className="relative group">
               <button
                 onClick={toggleLawzzle}
                 className="flex items-center space-x-2 hover:text-gold-400 transition-colors px-3 py-2 border rounded-md hover:bg-navy-800"
               >
-                <GraduationCap size={20} />
+                <GraduationCap size={12} />
                 <span>Lawzzle</span>
                 <ChevronDown size={16} />
               </button>
               {isLawzzleOpen && (
                 <div className="absolute top-full left-0 mt-2 w-48 bg-navy-800 rounded shadow-lg z-10">
-                  <Link
-                    href="/lawzzle/learnsections"
-                    className="block px-4 py-2 hover:bg-navy-700"
-                  >
+                  <Link href="/lawzzle/learnsections" className="block px-4 py-2 hover:bg-navy-700">
                     Learn Sections
                   </Link>
-                  <Link
-                    href="/lawzzle/learnessentials"
-                    className="block px-4 py-2 hover:bg-navy-700"
-                  >
+                  <Link href="/lawzzle/learnessentials" className="block px-4 py-2 hover:bg-navy-700">
                     Learn Essentials
                   </Link>
                 </div>
               )}
             </div>
 
-            <NavItem
-              href="/schools"
-              icon={<School size={20} />}
-              label="Law Notes"
-            />
-            <NavItem
-              href="/contact"
-              icon={<Phone size={20} />}
-              label="Contact Us"
-            />
+            <NavItem href="/schools" icon={<School size={12} />} label="Law Notes" />
+            <NavItem href="/contact" icon={<Phone size={12} />} label="Contact Us" />
           </div>
 
           {/* Desktop Buttons */}
@@ -97,7 +104,6 @@ const Navbar: React.FC = () => {
               Internship
             </Link>
 
-            {/* Auth-Aware Button */}
             {user ? (
               <Link
                 href="/dashboard"
@@ -131,55 +137,29 @@ const Navbar: React.FC = () => {
         {isMenuOpen && (
           <div className="md:hidden mt-4 bg-navy-800 rounded-lg p-4 animate-fadeIn">
             <div className="flex flex-col space-y-4">
-              <MobileNavItem
-                href="/"
-                icon={<BookOpen size={20} />}
-                label="Home"
-              />
-              <MobileNavItem
-                href="/books"
-                icon={<BookOpen size={20} />}
-                label="MCQ Corner"
-              />
+              <MobileNavItem href="/" icon={<BookOpen size={12} />} label="Home" />
+              <MobileNavItem href="/books" icon={<BookOpen size={12} />} label="MCQ Corner" />
               <div>
                 <button
                   onClick={toggleLawzzle}
                   className="flex items-center space-x-2 text-left w-full hover:text-gold-400"
                 >
-                  <GraduationCap size={20} />
+                  <GraduationCap size={12} />
                   <span>Lawzzle</span>
                   <ChevronDown
-                    size={16}
-                    className={`${
-                      isLawzzleOpen ? "rotate-180" : ""
-                    } transition-transform`}
+                    size={14}
+                    className={`${isLawzzleOpen ? "rotate-120" : ""} transition-transform`}
                   />
                 </button>
                 {isLawzzleOpen && (
                   <div className="pl-6 mt-2 flex flex-col space-y-2">
-                    <MobileNavItem
-                      href="/lawzzle/learnsections"
-                      label="Learn Sections"
-                      icon={undefined}
-                    />
-                    <MobileNavItem
-                      href="/lawzzle/learnessentials"
-                      label="Learn Essentials"
-                      icon={undefined}
-                    />
+                    <MobileNavItem href="/lawzzle/learnsections" label="Learn Sections" />
+                    <MobileNavItem href="/lawzzle/learnessentials" label="Learn Essentials" />
                   </div>
                 )}
               </div>
-              <MobileNavItem
-                href="/schools"
-                icon={<School size={20} />}
-                label="Law Notes"
-              />
-              <MobileNavItem
-                href="/contact"
-                icon={<Phone size={20} />}
-                label="Contact Us"
-              />
+              <MobileNavItem href="/schools" icon={<School size={12} />} label="Law Notes" />
+              <MobileNavItem href="/contact" icon={<Phone size={12} />} label="Contact Us" />
               <div className="pt-4 flex flex-col space-y-3">
                 <Link
                   href="/internship"
@@ -210,32 +190,5 @@ const Navbar: React.FC = () => {
     </nav>
   );
 };
-
-// Reusable Components
-interface NavItemProps {
-  href: string;
-  icon?: ReactNode;
-  label: string;
-}
-
-const NavItem = ({ href, icon, label }: NavItemProps) => (
-  <Link
-    href={href}
-    className="flex items-center space-x-2 hover:text-gold-400 transition-colors px-3 py-2 rounded-md hover:bg-navy-800"
-  >
-    {icon}
-    <span>{label}</span>
-  </Link>
-);
-
-const MobileNavItem = ({ href, icon, label }: NavItemProps) => (
-  <Link
-    href={href}
-    className="flex items-center space-x-2 hover:text-gold-400 transition-colors"
-  >
-    {icon}
-    <span>{label}</span>
-  </Link>
-);
 
 export default Navbar;
