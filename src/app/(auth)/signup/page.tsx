@@ -3,10 +3,10 @@
 import { useState, ChangeEvent } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { v4 as uuidv4 } from "uuid";
 import { supabase } from "@/lib/supabaseClient";
 
 export default function RegisterPage() {
+  
   const router = useRouter();
   const [step, setStep] = useState<1 | 2>(1);
 
@@ -18,10 +18,7 @@ export default function RegisterPage() {
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [password, setPassword] = useState("");
-  const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const [userId, setUserId] = useState<string | null>(null);
 
   const handleAvatarChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -33,9 +30,8 @@ export default function RegisterPage() {
   const validateStep1 = (): string | null => {
     if (!name.trim()) return "Name is required";
     if (!username.trim()) return "Username is required";
-    if (!email || !email.includes("@")) return "Please enter a valid email";
-    if (!phone.trim() || phone.length < 10)
-      return "Valid phone number is required";
+    if (!email.includes("@")) return "Valid email is required";
+    if (!phone.trim() || phone.length < 10) return "Phone number is invalid";
     if (!password || password.length < 6)
       return "Password must be at least 6 characters";
     if (!termsAccepted) return "You must accept the Terms and Conditions";
@@ -53,7 +49,7 @@ export default function RegisterPage() {
       .upload(filePath, avatar);
 
     if (error) {
-      console.error("Avatar upload error", error);
+      console.error("Avatar upload failed", error.message);
       return null;
     }
 
@@ -73,7 +69,7 @@ export default function RegisterPage() {
   const verifyOtpAndRegister = async () => {
     setLoading(true);
 
-    // 1. Sign up with Supabase Auth
+    // Step 1: Sign up
     const { data: signUpData, error: signUpError } = await supabase.auth.signUp(
       {
         email,
@@ -82,23 +78,22 @@ export default function RegisterPage() {
     );
 
     if (signUpError) {
-      alert("Signup error: " + signUpError.message);
+      alert("Signup failed: " + signUpError.message);
       setLoading(false);
       return;
     }
 
     const uid = signUpData?.user?.id;
     if (!uid) {
-      alert("Signup failed. User ID missing.");
+      alert("User ID missing.");
       setLoading(false);
       return;
     }
-    setUserId(uid);
 
-    // 2. Upload avatar if exists
+    // Step 2: Upload Avatar
     const avatarUrl = await uploadAvatarToSupabase(uid);
 
-    // 3. Insert user profile into public.users table
+    // Step 3: Insert into `users` table
     const { error: insertError } = await supabase.from("users").insert([
       {
         id: uid,
@@ -106,21 +101,18 @@ export default function RegisterPage() {
         username,
         email,
         phone,
-        password, // Storing only for redundancy; not recommended
         avatar_url: avatarUrl,
         terms_accepted: termsAccepted,
       },
     ]);
 
     if (insertError) {
-      alert("Database insert error: " + insertError.message);
+      alert("DB Insert failed: " + insertError.message);
       setLoading(false);
       return;
     }
 
-    alert(
-      "Registration successful. Please check your email to verify your account."
-    );
+    alert("Registration successful! Please verify your email.");
     setLoading(false);
     router.push("/login");
   };
@@ -135,15 +127,14 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-black overflow-hidden flex items-center justify-center">
-      {/* Background Image */}
+    <div className="relative min-h-screen bg-black flex items-center justify-center">
       <div className="absolute inset-0 z-0">
         <Image
           src="/login/login-bg.png"
           alt="Background"
           width={500}
           height={500}
-          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 z-0"
+          className="absolute bottom-0 left-1/2 transform -translate-x-1/2"
         />
       </div>
 
@@ -168,7 +159,7 @@ export default function RegisterPage() {
         <button
           onClick={handleGoogleSignIn}
           disabled={loading}
-          className="w-full flex items-center justify-center gap-3 bg-[#1b1919] hover:bg-[#f81f02] text-white py-3 rounded-lg font-semibold transition-all shadow"
+          className="w-full flex items-center justify-center gap-3 bg-[#1b1919] hover:bg-[#f81f02] text-white py-3 rounded-lg font-semibold"
         >
           <img src="icons/google.png" alt="Google Icon" className="w-6 h-6" />
           {loading ? "Processing..." : "Sign up with Google"}
@@ -179,45 +170,35 @@ export default function RegisterPage() {
         {step === 1 && (
           <>
             <input
-              type="text"
+              className="input"
               placeholder="Full Name *"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="input"
-              disabled={loading}
             />
             <input
-              type="text"
+              className="input"
               placeholder="Username *"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="input"
-              disabled={loading}
             />
             <input
-              type="email"
+              className="input"
               placeholder="Email *"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="input"
-              disabled={loading}
             />
             <input
-              type="text"
+              className="input"
               placeholder="+91xxxxxxxxxx *"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              className="input"
-              disabled={loading}
             />
             <input
+              className="input"
               type="password"
               placeholder="Password *"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="input"
-              disabled={loading}
-              autoComplete="new-password"
             />
 
             <label className="block text-white font-medium mt-3">
@@ -228,12 +209,10 @@ export default function RegisterPage() {
               accept="image/*"
               onChange={handleAvatarChange}
               className="text-white"
-              disabled={loading}
             />
             {avatarPreview && (
               <img
                 src={avatarPreview}
-                alt="Preview"
                 className="mt-2 w-20 h-20 rounded-full object-cover"
               />
             )}
@@ -243,7 +222,6 @@ export default function RegisterPage() {
                 type="checkbox"
                 checked={termsAccepted}
                 onChange={() => setTermsAccepted(!termsAccepted)}
-                disabled={loading}
               />
               I accept the{" "}
               <span className="text-yellow-400 underline cursor-pointer">
@@ -253,8 +231,8 @@ export default function RegisterPage() {
 
             <button
               onClick={proceedToStep2}
-              disabled={loading || !termsAccepted}
-              className="w-full bg-[#000] hover:bg-[#ff9f10] text-white py-3 rounded-lg font-semibold transition-all shadow disabled:opacity-50"
+              disabled={!termsAccepted}
+              className="w-full bg-[#000] hover:bg-[#ff9f10] text-white py-3 rounded-lg font-semibold"
             >
               Next
             </button>
@@ -267,7 +245,6 @@ export default function RegisterPage() {
               e.preventDefault();
               verifyOtpAndRegister();
             }}
-            noValidate
           >
             <p className="text-yellow-400 text-center mb-4">
               Verify your account by clicking the link sent to your email.
@@ -276,7 +253,7 @@ export default function RegisterPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-[#000] hover:bg-[#ff9f10] text-white py-3 rounded-lg font-semibold transition-all shadow disabled:opacity-50"
+              className="w-full bg-[#000] hover:bg-[#ff9f10] text-white py-3 rounded-lg font-semibold"
             >
               {loading ? "Registering..." : "Complete Registration"}
             </button>
@@ -294,8 +271,8 @@ export default function RegisterPage() {
         <div className="text-center text-sm text-gray-300 mt-6">
           Already have an account?{" "}
           <button
-            className="text-[#c58026] hover:text-[#ffdd1b] underline font-medium"
             onClick={() => router.push("/login")}
+            className="text-[#c58026] hover:text-[#ffdd1b] underline font-medium"
           >
             Login here
           </button>

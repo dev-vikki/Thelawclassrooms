@@ -8,15 +8,36 @@ import { CalendarDays, Book, Layers, FileText, LogOut } from "lucide-react";
 export default function DashboardPage() {
   const router = useRouter();
   const [user, setUser] = useState<any>(null);
+  const [userName, setUserName] = useState<string | null>(null);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
-      if (!data.session) {
+    const fetchUserAndProfile = async () => {
+      const { data, error } = await supabase.auth.getSession();
+
+      if (!data?.session) {
         router.push("/login");
-      } else {
-        setUser(data.session.user);
+        return;
       }
-    });
+
+      const currentUser = data.session.user;
+      setUser(currentUser);
+
+      // Fetch user profile
+      const { data: profile, error: profileError } = await supabase
+        .from("profiles")
+        .select("name")
+        .eq("id", currentUser.id)
+        .single();
+
+      if (profileError) {
+        console.error("Error fetching profile:", profileError.message);
+        setUserName("User");
+      } else {
+        setUserName(profile?.name || "User");
+      }
+    };
+
+    fetchUserAndProfile();
   }, [router]);
 
   if (!user) {
@@ -49,10 +70,12 @@ export default function DashboardPage() {
         {/* Greeting */}
         <div className="bg-gradient-to-r from-yellow-700 to-yellow-500 p-6 rounded-lg flex justify-between items-center mb-6">
           <div>
-            <h2 className="text-2xl font-bold">Hey Tejas!</h2>
+            <h2 className="text-2xl font-bold">
+              Hey {userName ? userName : "Loading"}!
+            </h2>
             <p className="italic text-white mt-1">
               "Leave the worries behind —<br />
-              let’s conquer those exams together!"
+              let's conquer those exams together!"
             </p>
           </div>
           <div className="flex flex-col items-center">

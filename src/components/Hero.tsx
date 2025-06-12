@@ -1,16 +1,15 @@
-'use client';
+"use client";
 
-import React from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Oswald } from 'next/font/google';
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Oswald } from "next/font/google";
 
-
-const oswald = Oswald({ subsets: ['latin'], weight: ['400', '700'] });
+const oswald = Oswald({ subsets: ["latin"], weight: ["400", "700"] });
 
 const Hero: React.FC = () => {
   return (
-    <div className="bg-black text-white" >
+    <div className="bg-black text-white">
       {/* Hero Banner */}
       <div className="relative w-full aspect-[1344/440] overflow-hidden rounded-xl mb-1">
         <img
@@ -20,72 +19,74 @@ const Hero: React.FC = () => {
         />
         <div className="absolute inset-0 z-10 flex items-center px-6 sm:px-12">
           <div className="max-w-xl">
-          <h1 className={`${oswald.className} text-5xl sm:text-7xl md:text-8xl font-extrabold leading-tight text-white whitespace-nowrap`}>
-  Build a memory for
-</h1>
-<h2 className={`${oswald.className} text-4xl sm:text-8xl font-extrabold leading-tight mt-2`}>
-  <span className="bg-gradient-to-r from-[#ff6600] to-[#ffcc00] bg-clip-text text-transparent">
-    Law that lasts
-  </span>
-</h2>
+            <h1
+              className={`${oswald.className} text-5xl sm:text-7xl md:text-8xl font-extrabold leading-tight text-white whitespace-nowrap`}
+            >
+              Build a memory for
+            </h1>
+            <h2
+              className={`${oswald.className} text-4xl sm:text-8xl font-extrabold leading-tight mt-2`}
+            >
+              <span className="bg-gradient-to-r from-[#ff6600] to-[#ffcc00] bg-clip-text text-transparent">
+                Law that lasts
+              </span>
+            </h2>
             <p className="mt-4 text-gray-500 text-sm sm:text-lg leading-relaxed">
               And conquer the exam with spaced repetition, targeted <br />
               tests, and strategies that stick for lifelong success
             </p>
             <div className="inline-block mt-8 rounded-full p-[1px] bg-gradient-to-r from-[#ff6600] via-[#ffcc00] to-[#ff0000]">
               <Link href="/login" passHref>
-              <button className="px-8 py-3 rounded-full bg-black text-white text-sm sm:text-base hover:bg-opacity-80 transition-all">
-                Start learning
-              </button>
+                <button className="px-8 py-3 rounded-full bg-black text-white text-sm sm:text-base hover:bg-opacity-80 transition-all">
+                  Start learning
+                </button>
               </Link>
             </div>
           </div>
         </div>
       </div>
       {/* Affiliations Scroll Section */}
-<div className="bg-black py-6 overflow-hidden relative">
-  <h2 className="text-white text-center text-lg font-medium mb-6">Students from</h2>
+      <div className="bg-black py-6 overflow-hidden relative">
+        <h2 className="text-white text-center text-lg font-medium mb-6">
+          Students from
+        </h2>
 
-  <div className="overflow-hidden">
-    <div className="flex animate-scroll gap-16 px-6">
-      {[
-        '/logos/rizvilogo.png',
-        '/logos/amulogo.png',
-        '/logos/bbdlogo.png',
-        '/logos/DNLULOGO.png',
-        '/logos/IILlogo.png',
-        '/logos/svlogo.png',
-        '/logos/ximlogo.png',
-        '/logos/amitylogo1.png',
-      ]
-        .concat([
-          '/logos/rizvilogo.png',
-          '/logos/amulogo.png',
-          '/logos/bbdlogo.png',
-          '/logos/DNLULOGO.png',
-          '/logos/IILlogo.png',
-          '/logos/svlogo.png',
-          '/logos/ximlogo.png',
-          '/logos/amitylogo1.png',
-        ])
-        .map((src, idx) => (
-          <div key={idx} className="flex-shrink-0">
-            <Image
-              src={src}
-              alt={`Logo ${idx}`}
-              width={186}
-              height={74}
-              className="object-contain"
-            />
+        <div className="overflow-hidden">
+          <div className="flex animate-scroll gap-16 px-6">
+            {[
+              "/logos/rizvilogo.png",
+              "/logos/amulogo.png",
+              "/logos/bbdlogo.png",
+              "/logos/DNLULOGO.png",
+              "/logos/IILlogo.png",
+              "/logos/svlogo.png",
+              "/logos/ximlogo.png",
+              "/logos/amitylogo1.png",
+            ]
+              .concat([
+                "/logos/rizvilogo.png",
+                "/logos/amulogo.png",
+                "/logos/bbdlogo.png",
+                "/logos/DNLULOGO.png",
+                "/logos/IILlogo.png",
+                "/logos/svlogo.png",
+                "/logos/ximlogo.png",
+                "/logos/amitylogo1.png",
+              ])
+              .map((src, idx) => (
+                <div key={idx} className="flex-shrink-0">
+                  <Image
+                    src={src}
+                    alt={`Logo ${idx}`}
+                    width={186}
+                    height={74}
+                    className="object-contain"
+                  />
+                </div>
+              ))}
           </div>
-        ))}
-    </div>
-  </div>
-</div>
-
-
-
-
+        </div>
+      </div>
 
       {/* Grid Section */}
       {/* Grid Section */}
@@ -100,22 +101,25 @@ const Hero: React.FC = () => {
 
             {/* Grid Items */}
             {[
-              { title: '5500 +', subtitle: 'Subject wise and topic wise MCQ' },
-              { title: '200 +', subtitle: 'Essentials and more' },
-              { title: '5000+', subtitle: 'Sections to learn' },
+              { title: "5500 +", subtitle: "Subject wise and topic wise MCQ" },
+              { title: "200 +", subtitle: "Essentials and more" },
+              { title: "5000+", subtitle: "Sections to learn" },
               {},
               { center: true },
               {},
-              { title: '80+', subtitle: 'State Judiciary previous\nyear Papers' },
-              { title: '1000+', subtitle: 'State Judiciary questions' },
-              { title: '300+', subtitle: 'Legal concept Clarified' },
+              {
+                title: "80+",
+                subtitle: "State Judiciary previous\nyear Papers",
+              },
+              { title: "1000+", subtitle: "State Judiciary questions" },
+              { title: "300+", subtitle: "Legal concept Clarified" },
             ].map((item, idx) => (
               <div
                 key={idx}
                 className={`flex items-center justify-center text-white z-2 px-4 py-10 ${
                   item.center
-                    ? 'bg-[radial-gradient(circle,#DAA520_40%,#121212_100%)] font-bold'
-                    : ''
+                    ? "bg-[radial-gradient(circle,#DAA520_40%,#121212_100%)] font-bold"
+                    : ""
                 }`}
               >
                 {item.center ? (
@@ -127,7 +131,9 @@ const Hero: React.FC = () => {
                 ) : item.title ? (
                   <div>
                     <h2 className="text-2xl font-bold">{item.title}</h2>
-                    <p className="text-sm mt-2 whitespace-pre-wrap">{item.subtitle}</p>
+                    <p className="text-sm mt-2 whitespace-pre-wrap">
+                      {item.subtitle}
+                    </p>
                   </div>
                 ) : null}
               </div>
@@ -146,7 +152,10 @@ const Hero: React.FC = () => {
       {/* Curated Learning Section */}
       <section className="bg-black text-white py-12 px-4 md:px-12">
         <h2 className="text-3xl font-semibold mb-10">
-          Explore Curated learning <span className="text-[#FFA500] underline underline-offset-4">Build</span>
+          Explore Curated learning{" "}
+          <span className="text-[#FFA500] underline underline-offset-4">
+            Build
+          </span>
         </h2>
 
         <div className="flex flex-col lg:flex-row gap-8">
@@ -154,13 +163,13 @@ const Hero: React.FC = () => {
           <Link href="/mcqs" className="flex-1">
             <div className="bg-zinc-900 rounded-2xl p-4 border border-white/20 cursor-pointer hover:scale-[1.01] transition">
               <div className="rounded-2xl overflow-hidden border border-white/20 relative min-h-[300px] cursor-pointer hover:scale-[1.02] transition">
-              <Image
-                src="/books/curated1.jpg"
-                alt="Indian Contract Act"
-                layout="fill"
-                objectFit="cover"
-                className="absolute inset-1"
-              />
+                <Image
+                  src="/books/curated1.jpg"
+                  alt="Indian Contract Act"
+                  layout="fill"
+                  objectFit="cover"
+                  className="absolute inset-1"
+                />
               </div>
               <p className="text-sm text-gray-400">+ 10 MCQ</p>
               <p className="text-lg font-medium">Subject & Topic Wise MCQ's</p>
@@ -171,14 +180,14 @@ const Hero: React.FC = () => {
           <Link href="/pyq" className="flex-1">
             <div className="bg-zinc-900 rounded-2xl p-4 border border-white/20 cursor-pointer hover:scale-[1.01] transition">
               <div className="rounded-2xl overflow-hidden border border-white/20 relative min-h-[300px] cursor-pointer hover:scale-[1.02] transition">
-              <Image
-                src="/books/curated2new.jpg"
-                alt="Indian Contract Act"
-                layout="fill"
-                objectFit="cover"
-                className="absolute inset-1"
-              />
-            </div>
+                <Image
+                  src="/books/curated2new.jpg"
+                  alt="Indian Contract Act"
+                  layout="fill"
+                  objectFit="cover"
+                  className="absolute inset-1"
+                />
+              </div>
               <p className="text-sm text-gray-400">+ 6 PYQ</p>
               <p className="text-lg font-medium">State Judiciary PYQ's</p>
             </div>
@@ -200,39 +209,37 @@ const Hero: React.FC = () => {
       </section>
 
       {/* Mentors Section */}
-    <section className="bg-black text-white px-6 lg:px-24 py-16">
-  <h2 className="text-3xl font-bold mb-12 border-l-4 border-yellow-500 pl-4">
-    New Age Mentors
-  </h2>
+      <section className="bg-black text-white px-6 lg:px-24 py-16">
+        <h2 className="text-3xl font-bold mb-12 border-l-4 border-yellow-500 pl-4">
+          New Age Mentors
+        </h2>
 
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-    {mentors.map((mentor) => (
-      <div
-        key={mentor.name}
-        className="relative h-96 shadow-lg rounded-2xl overflow-hidden"
-      >
-        {/* Full Image with NO corner clipping */}
-        <img
-          src={mentor.img}
-          alt={mentor.name}
-          className="absolute inset-0 w-100px h-100px object-contain rounded-2xl"
-        />
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {mentors.map((mentor) => (
+            <div
+              key={mentor.name}
+              className="relative h-96 shadow-lg rounded-2xl overflow-hidden"
+            >
+              {/* Full Image with NO corner clipping */}
+              <img
+                src={mentor.img}
+                alt={mentor.name}
+                className="absolute inset-0 w-100px h-100px object-contain rounded-2xl"
+              />
 
-        {/* Smooth gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
+              {/* Smooth gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
 
-        {/* Text content */}
-        <div className="absolute bottom-4 left-0 w-full text-center px-4">
-          <h3 className="text-xl font-bold text-white">{mentor.name}</h3>
-          <p className="text-sm text-white font-medium">{mentor.title}</p>
-          {/* <p className="text-sm text-gray-300 mt-1">{mentor.company}</p> */}
+              {/* Text content */}
+              <div className="absolute bottom-4 left-0 w-full text-center px-4">
+                <h3 className="text-xl font-bold text-white">{mentor.name}</h3>
+                <p className="text-sm text-white font-medium">{mentor.title}</p>
+                {/* <p className="text-sm text-gray-300 mt-1">{mentor.company}</p> */}
+              </div>
+            </div>
+          ))}
         </div>
-      </div>
-    ))}
-  </div>
-</section>
-
-
+      </section>
 
       {/* Testimonials Section */}
       {/* <section className="bg-black text-white px-6 lg:px-24 py-10">
@@ -298,11 +305,31 @@ const Hero: React.FC = () => {
 
 // Sample data for mentors and testimonials
 const mentors = [
-  { name: 'Vibhankar Singh', title: 'Advocate, Lucknow HC', img: '/mentors/vibhankar.jpeg' },
-  { name: 'Shubranshu Singh', title: 'High Court of Judicature at Allahabad, Lucknow Bench', img: '/mentors/shubranshu.jpeg' },
-  { name: 'Amit Singh', title: 'Advocate, Lucknow HC', img: '/mentors/Amitsingh.jpeg' },
-  { name: 'Abhishek Mishra', title: 'Advocate, Lucknow HC', img: '/mentors/abhishek.jpeg' },
-  { name: 'Shourya Gandhi', title: 'Advocate, Uttar Pradesh High Court', img: '/mentors/shouryagandhi.jpeg' },
+  {
+    name: "Vibhankar Singh",
+    title: "Advocate, Lucknow HC",
+    img: "/mentors/vibhankar.jpeg",
+  },
+  {
+    name: "Shubranshu Singh",
+    title: "High Court of Judicature at Allahabad, Lucknow Bench",
+    img: "/mentors/shubranshu.jpeg",
+  },
+  {
+    name: "Amit Singh",
+    title: "Advocate, Lucknow HC",
+    img: "/mentors/Amitsingh.jpeg",
+  },
+  {
+    name: "Abhishek Mishra",
+    title: "Advocate, Lucknow HC",
+    img: "/mentors/abhishek.jpeg",
+  },
+  {
+    name: "Shourya Gandhi",
+    title: "Advocate, Uttar Pradesh High Court",
+    img: "/mentors/shouryagandhi.jpeg",
+  },
 ];
 
 const testimonials = [
