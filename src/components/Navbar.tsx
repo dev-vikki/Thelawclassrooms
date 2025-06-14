@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useAuth } from "@/lib/useAuth";
+import { usePathname } from "next/navigation";
 
 interface NavItemProps {
   href: string;
@@ -19,30 +20,53 @@ interface NavItemProps {
   label: string;
 }
 
-const NavItem = ({ href, icon, label }: NavItemProps) => (
-  <Link
-    href={href}
-    className="flex items-center space-x-2 hover:text-gold-400 transition-colors px-3 py-2 rounded-md hover:bg-navy-800"
-  >
-    {icon}
-    <span>{label}</span>
-  </Link>
-);
+const NavItem = ({ href, icon, label }: NavItemProps) => {
+  const pathname = usePathname();
+  const isActive = pathname === href;
 
-const MobileNavItem = ({ href, icon, label }: NavItemProps) => (
-  <Link
-    href={href}
-    className="flex items-center space-x-2 hover:text-gold-400 transition-colors"
-  >
-    {icon}
-    <span>{label}</span>
-  </Link>
-);
+  return (
+    <Link
+      href={href}
+      className={`flex items-center space-x-2 px-3 py-2 rounded-md transition-colors
+        ${
+          isActive
+            ? "text-gold-400 bg-navy-800"
+            : "text-white hover:text-gold-400 hover:bg-navy-800"
+        }
+      `}
+    >
+      {icon}
+      <span>{label}</span>
+    </Link>
+  );
+};
+
+const MobileNavItem = ({ href, icon, label }: NavItemProps) => {
+  const pathname = usePathname();
+  const isActive = pathname === href;
+
+  return (
+    <Link
+      href={href}
+      className={`flex items-center space-x-2 px-2 py-1 rounded-md transition-colors
+        ${
+          isActive
+            ? "text-gold-400 bg-navy-800"
+            : "text-white hover:text-gold-400"
+        }
+      `}
+    >
+      {icon}
+      <span>{label}</span>
+    </Link>
+  );
+};
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLawzzleOpen, setIsLawzzleOpen] = useState(false);
   const { user } = useAuth();
+  const pathname = usePathname();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const toggleLawzzle = () => setIsLawzzleOpen(!isLawzzleOpen);
@@ -59,14 +83,14 @@ const Navbar: React.FC = () => {
                 alt="Logo"
                 className="object-contain w-[35px] h-[35px] md:w-[80px] md:h-[60px]"
               />
-              <span className=" font-light">
+              <span className="font-light">
                 The <span className="text-gold-500">Law</span> Classrooms
               </span>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center ">
+          <div className="hidden md:flex items-center">
             <NavItem href="/" icon={<BookOpen size={12} />} label="Home" />
             <NavItem
               href="/books"
@@ -77,7 +101,12 @@ const Navbar: React.FC = () => {
             <div className="relative group">
               <button
                 onClick={toggleLawzzle}
-                className="flex items-center space-x-2 hover:text-gold-400 transition-colors px-3 py-2 border rounded-md hover:bg-navy-800"
+                className={`flex items-center space-x-2 px-3 py-2 border rounded-md transition-colors
+                ${
+                  pathname.startsWith("/lawzzle")
+                    ? "text-gold-400 bg-navy-800"
+                    : "hover:text-gold-400 hover:bg-navy-800"
+                }`}
               >
                 <GraduationCap size={12} />
                 <span>Lawzzle</span>
@@ -87,13 +116,21 @@ const Navbar: React.FC = () => {
                 <div className="absolute top-full left-0 mt-2 w-48 bg-navy-800 rounded shadow-lg z-10">
                   <Link
                     href="/lawzzle/learnsections"
-                    className="block px-4 py-2 hover:bg-navy-700"
+                    className={`block px-4 py-2 hover:bg-navy-700 ${
+                      pathname === "/lawzzle/learnsections"
+                        ? "bg-navy-700 text-gold-400"
+                        : ""
+                    }`}
                   >
                     Learn Sections
                   </Link>
                   <Link
                     href="/lawzzle/learnessentials"
-                    className="block px-4 py-2 hover:bg-navy-700"
+                    className={`block px-4 py-2 hover:bg-navy-700 ${
+                      pathname === "/lawzzle/learnessentials"
+                        ? "bg-navy-700 text-gold-400"
+                        : ""
+                    }`}
                   >
                     Learn Essentials
                   </Link>
@@ -198,6 +235,11 @@ const Navbar: React.FC = () => {
                 href="/semester"
                 icon={<Phone size={12} />}
                 label="Semester"
+              />
+              <MobileNavItem
+                href="/syllabus"
+                icon={<BookOpen size={12} />}
+                label="Syllabus"
               />
               <div className="pt-4 flex flex-col space-y-3">
                 <Link
