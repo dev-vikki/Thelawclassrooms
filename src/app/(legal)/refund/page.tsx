@@ -23,8 +23,6 @@ export default function RefundpolicyPage() {
         be made within
         <span className="font-semibold"> 10 days</span> of the purchase date.
       </p>
-
-      
     </div>
   );
 }

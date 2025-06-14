@@ -66,9 +66,13 @@ const Navbar: React.FC = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden md:flex items-center ">
             <NavItem href="/" icon={<BookOpen size={12} />} label="Home" />
-            <NavItem href="/books" icon={<BookOpen size={12} />} label="MCQ Corner" />
+            <NavItem
+              href="/books"
+              icon={<BookOpen size={12} />}
+              label="MCQ Corner"
+            />
 
             <div className="relative group">
               <button
@@ -81,18 +85,29 @@ const Navbar: React.FC = () => {
               </button>
               {isLawzzleOpen && (
                 <div className="absolute top-full left-0 mt-2 w-48 bg-navy-800 rounded shadow-lg z-10">
-                  <Link href="/lawzzle/learnsections" className="block px-4 py-2 hover:bg-navy-700">
+                  <Link
+                    href="/lawzzle/learnsections"
+                    className="block px-4 py-2 hover:bg-navy-700"
+                  >
                     Learn Sections
                   </Link>
-                  <Link href="/lawzzle/learnessentials" className="block px-4 py-2 hover:bg-navy-700">
+                  <Link
+                    href="/lawzzle/learnessentials"
+                    className="block px-4 py-2 hover:bg-navy-700"
+                  >
                     Learn Essentials
                   </Link>
                 </div>
               )}
             </div>
 
-            <NavItem href="/schools" icon={<School size={12} />} label="Law Notes" />
-            <NavItem href="/contact" icon={<Phone size={12} />} label="Contact Us" />
+            <NavItem
+              href="/schools"
+              icon={<School size={12} />}
+              label="Law Notes"
+            />
+            <NavItem href="/semester" label="Semester" />
+            <NavItem href="/syllabus" label="Syllabus" />
           </div>
 
           {/* Desktop Buttons */}
@@ -137,8 +152,16 @@ const Navbar: React.FC = () => {
         {isMenuOpen && (
           <div className="md:hidden mt-4 bg-navy-800 rounded-lg p-4 animate-fadeIn">
             <div className="flex flex-col space-y-4">
-              <MobileNavItem href="/" icon={<BookOpen size={12} />} label="Home" />
-              <MobileNavItem href="/books" icon={<BookOpen size={12} />} label="MCQ Corner" />
+              <MobileNavItem
+                href="/"
+                icon={<BookOpen size={12} />}
+                label="Home"
+              />
+              <MobileNavItem
+                href="/books"
+                icon={<BookOpen size={12} />}
+                label="MCQ Corner"
+              />
               <div>
                 <button
                   onClick={toggleLawzzle}
@@ -148,18 +171,34 @@ const Navbar: React.FC = () => {
                   <span>Lawzzle</span>
                   <ChevronDown
                     size={14}
-                    className={`${isLawzzleOpen ? "rotate-120" : ""} transition-transform`}
+                    className={`${
+                      isLawzzleOpen ? "rotate-120" : ""
+                    } transition-transform`}
                   />
                 </button>
                 {isLawzzleOpen && (
                   <div className="pl-6 mt-2 flex flex-col space-y-2">
-                    <MobileNavItem href="/lawzzle/learnsections" label="Learn Sections" />
-                    <MobileNavItem href="/lawzzle/learnessentials" label="Learn Essentials" />
+                    <MobileNavItem
+                      href="/lawzzle/learnsections"
+                      label="Learn Sections"
+                    />
+                    <MobileNavItem
+                      href="/lawzzle/learnessentials"
+                      label="Learn Essentials"
+                    />
                   </div>
                 )}
               </div>
-              <MobileNavItem href="/schools" icon={<School size={12} />} label="Law Notes" />
-              <MobileNavItem href="/contact" icon={<Phone size={12} />} label="Contact Us" />
+              <MobileNavItem
+                href="/schools"
+                icon={<School size={12} />}
+                label="Law Notes"
+              />
+              <MobileNavItem
+                href="/semester"
+                icon={<Phone size={12} />}
+                label="Semester"
+              />
               <div className="pt-4 flex flex-col space-y-3">
                 <Link
                   href="/internship"
