@@ -255,8 +255,13 @@ const Footer: React.FC = () => {
             <h3 className="text-xl font-bold mb-4">Company</h3>
             <ul className="space-y-2">
               <li>
+                <Link href="/" className="text-gray-400 hover:text-gold-500">
+                  Home
+                </Link>
+              </li>
+              <li>
                 <Link
-                  href="/about"
+                  href="/about-us"
                   className="text-gray-400 hover:text-gold-500"
                 >
                   About Us
@@ -270,30 +275,7 @@ const Footer: React.FC = () => {
                   Contact Us
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/careers"
-                  className="text-gray-400 hover:text-gold-500"
-                >
-                  Careers
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/designer"
-                  className="text-gray-400 hover:text-gold-500"
-                >
-                  For Designer
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/writers"
-                  className="text-gray-400 hover:text-gold-500"
-                >
-                  For Writers
-                </Link>
-              </li>
+
               <li>
                 <Link
                   href="/terms"
@@ -312,7 +294,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <Link
-                  href="/support"
+                  href="/contact"
                   className="text-gray-400 hover:text-gold-500"
                 >
                   Help & Support

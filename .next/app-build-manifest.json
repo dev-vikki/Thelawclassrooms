@@ -1,41 +1,315 @@
 {
   "pages": {
-    "/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/layout.css",
-      "static/chunks/app/layout.js"
+    "/_not-found/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/app/_not-found/page-4ae2851a6699b961.js"
     ],
-    "/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/page.css",
-      "static/chunks/app/page.js"
+    "/layout": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/css/0c35e0f2ad8ccd7d.css",
+      "static/chunks/851-c6952f3282869f27.js",
+      "static/chunks/6874-870d8fad69715b59.js",
+      "static/chunks/app/layout-4d6db4928d359cbe.js"
+    ],
+    "/(legal)/privacy/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/app/(legal)/privacy/page-d624260140e45f62.js"
+    ],
+    "/(legal)/refund/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/app/(legal)/refund/page-6ac3ce660ec8b0bf.js"
+    ],
+    "/(legal)/terms/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/app/(legal)/terms/page-47986f0cb1e6c52f.js"
+    ],
+    "/about-us/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/app/about-us/page-c579ccc93721ca21.js"
     ],
     "/(auth)/login/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(auth)/login/page.js"
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/851-c6952f3282869f27.js",
+      "static/chunks/6766-9e14fc597d1d9832.js",
+      "static/chunks/app/(auth)/login/page-98e47a35d5518b49.js"
+    ],
+    "/books/bihar-judiciary/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/app/books/bihar-judiciary/page-17a15325930cc94c.js"
+    ],
+    "/books/chattisgarh-judiciary/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/app/books/chattisgarh-judiciary/page-a08da5192eec9e5d.js"
+    ],
+    "/books/civil-procedure-code/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/app/books/civil-procedure-code/page-42d01fabddaa801b.js"
+    ],
+    "/books/himanchal-judiciary/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/app/books/himanchal-judiciary/page-e73ac5572b8c4184.js"
+    ],
+    "/books/criminal-procedure-code/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/app/books/criminal-procedure-code/page-f949358a41645b22.js"
     ],
     "/(auth)/signup/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(auth)/signup/page.js"
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/851-c6952f3282869f27.js",
+      "static/chunks/6766-9e14fc597d1d9832.js",
+      "static/chunks/app/(auth)/signup/page-5eb7459bee706bee.js"
+    ],
+    "/books/haryana-judiciary/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/app/books/haryana-judiciary/page-c8cadb563b6862bb.js"
+    ],
+    "/books/indian-contract-act/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/app/books/indian-contract-act/page-d709460116ce15b4.js"
+    ],
+    "/books/indian-evidence-act/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/app/books/indian-evidence-act/page-764e35d73bf26054.js"
+    ],
+    "/books/indian-penal-code/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/app/books/indian-penal-code/page-92cdf5ea7d50d09c.js"
+    ],
+    "/books/jurisprudence/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/app/books/jurisprudence/page-b62991c49b2197d3.js"
     ],
     "/books/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/books/page.js"
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/6874-870d8fad69715b59.js",
+      "static/chunks/app/books/page-286d76dba1eef2a1.js"
     ],
-    "/mcq/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/mcq/page.js"
+    "/books/mp-judiciary/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/app/books/mp-judiciary/page-cbd088a977545111.js"
+    ],
+    "/books/maharashtra-judiciary/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/app/books/maharashtra-judiciary/page-1afa4bdf73e092aa.js"
+    ],
+    "/books/rajasthan-judiciary/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/app/books/rajasthan-judiciary/page-be017b01098baa66.js"
+    ],
+    "/books/punjab-judiciary/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/app/books/punjab-judiciary/page-91e4145a2a3e3239.js"
+    ],
+    "/books/transfer-of-property-act/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/app/books/transfer-of-property-act/page-87708303bdd33dc4.js"
+    ],
+    "/contact/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/app/contact/page-45828ea0dd3db43d.js"
+    ],
+    "/books/uk-judiciary/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/app/books/uk-judiciary/page-ad1d3d62541baeb2.js"
+    ],
+    "/business/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/app/business/page-7a4b4ff681988069.js"
+    ],
+    "/books/up-judiciary/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/app/books/up-judiciary/page-05bb6f07f5d8b98f.js"
+    ],
+    "/courses/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/app/courses/page-36aff2831ddd1aa9.js"
+    ],
+    "/internship/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/css/8b9019b9eb9c264d.css",
+      "static/chunks/6766-9e14fc597d1d9832.js",
+      "static/chunks/app/internship/page-c90f27ac2e15ef6a.js"
+    ],
+    "/lawzzle/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/app/lawzzle/page-58b4e0850da8bb22.js"
+    ],
+    "/live/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/app/live/page-71b867a7d8bff841.js"
+    ],
+    "/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/css/8b9019b9eb9c264d.css",
+      "static/chunks/6766-9e14fc597d1d9832.js",
+      "static/chunks/6874-870d8fad69715b59.js",
+      "static/chunks/app/page-fceeb6b775c73a2b.js"
     ],
     "/lawzzle/learnessentials/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/lawzzle/learnessentials/page.js"
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/app/lawzzle/learnessentials/page-64f3a0322ee4953c.js"
+    ],
+    "/lawzzle/learnsections/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/app/lawzzle/learnsections/page-4251e173ba4eb086.js"
+    ],
+    "/schools/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/app/schools/page-deb13a4e9f70e4a2.js"
+    ],
+    "/mcq/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/851-c6952f3282869f27.js",
+      "static/chunks/6766-9e14fc597d1d9832.js",
+      "static/chunks/app/mcq/page-4e88a29694238c74.js"
+    ],
+    "/dashboard/layout": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/6874-870d8fad69715b59.js",
+      "static/chunks/app/dashboard/layout-c6e9d1519a7dd2c5.js"
+    ],
+    "/dashboard/notes/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/app/dashboard/notes/page-5d1f20939148fc3f.js"
+    ],
+    "/dashboard/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/851-c6952f3282869f27.js",
+      "static/chunks/app/dashboard/page-fd2755c78a656ecd.js"
+    ],
+    "/dashboard/state-pyqs/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/app/dashboard/state-pyqs/page-34e8cff9a0dbfbf9.js"
+    ],
+    "/dashboard/subjects/page": [
+      "static/chunks/webpack-f5c02b7683cf6d33.js",
+      "static/chunks/4bd1b696-0c44d6e305ee193a.js",
+      "static/chunks/1684-2e63039c9d126e7c.js",
+      "static/chunks/main-app-90f0cb1c20608095.js",
+      "static/chunks/app/dashboard/subjects/page-17580b1aed4b8372.js"
     ]
   }
 }
