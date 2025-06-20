@@ -1,4 +1,7 @@
-// app/about-us/page.tsx (App Router format for Next.js 13+)
+
+export const metadata = {
+  title: "Contact Us - The law classrooms",
+};
 
 export default function AboutusPage() {
   return (

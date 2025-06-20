@@ -1,24 +1,24 @@
-import type { Metadata } from 'next';
-import './globals.css';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import { Oswald, Poppins } from 'next/font/google';
+import type { Metadata } from "next";
+import "./globals.css";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import { Oswald, Poppins } from "next/font/google";
 
 const oswald = Oswald({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  variable: '--font-oswald',
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-oswald",
 });
 
 const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  variable: '--font-poppins',
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-poppins",
 });
 
 export const metadata: Metadata = {
-  title: 'The Law Classrooms',
-  description: '#1 Actionable Legal Education Platform',
+  title: "The Law Classrooms",
+  description: "The law classrooms law pyqs question paper for pretics",
 };
 
 export default function RootLayout({

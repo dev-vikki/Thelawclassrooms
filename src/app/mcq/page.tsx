@@ -1,20 +1,26 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
 import Image from "next/image";
 
 interface MCQQuestion {
   id: string;
+  topic_id?: string | null;
   question: string;
   option_a: string;
   option_b: string;
   option_c: string;
   option_d: string;
   correct_answer?: "option_a" | "option_b" | "option_c" | "option_d";
+  created_at?: string;
 }
 
 export default function MCQsPage() {
+  const searchParams = useSearchParams();
+  const topicId = searchParams.get("topic");
+
   const [visible, setVisible] = useState(false);
   const [secondsElapsed, setSecondsElapsed] = useState(0);
   const [startTimer, setStartTimer] = useState(false);
@@ -38,20 +44,19 @@ export default function MCQsPage() {
 
   useEffect(() => {
     fetchQuestions();
-  }, []);
+  }, [topicId]);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setStartTimer(true);
-    }, 5000); // Start after 5 seconds
+    const timeout = setTimeout(() => setStartTimer(true), 5000);
     return () => clearTimeout(timeout);
   }, []);
 
   useEffect(() => {
     if (!startTimer) return;
-    const timer = setInterval(() => {
-      setSecondsElapsed((prev) => prev + 1);
-    }, 1000);
+    const timer = setInterval(
+      () => setSecondsElapsed((prev) => prev + 1),
+      1000
+    );
     return () => clearInterval(timer);
   }, [startTimer]);
 
@@ -59,17 +64,21 @@ export default function MCQsPage() {
     try {
       setLoading(true);
       setError(null);
-      const { data, error: supabaseError } = await supabase
+
+      const query = supabase
         .from("quiz_questions")
-        .select("*");
+        .select("*")
+        .order("created_at", { ascending: true });
+
+      const { data, error: supabaseError } = topicId
+        ? await query.eq("topic_id", topicId)
+        : await query;
+
       if (supabaseError) throw new Error(supabaseError.message);
-      if (data) {
-        setQuestions(data as MCQQuestion[]);
-        setCurrentQuestionIndex(0);
-        setSelectedOptionIndex(null);
-      } else {
-        setQuestions([]);
-      }
+
+      setQuestions((data || []) as MCQQuestion[]);
+      setCurrentQuestionIndex(0);
+      setSelectedOptionIndex(null);
     } catch (err: any) {
       setError(`Failed to load questions: ${err.message}`);
     } finally {
@@ -90,7 +99,6 @@ export default function MCQsPage() {
   const correctIndex = ["option_a", "option_b", "option_c", "option_d"].indexOf(
     currentQuestion?.correct_answer || ""
   );
-
   const correctAnswerText = options[correctIndex];
   const totalQuestions = questions.length;
   const currentQNum = currentQuestionIndex + 1;
@@ -123,7 +131,6 @@ export default function MCQsPage() {
 
   const handleNextQuestions = () => {
     evaluateAnswer();
-
     if (currentQuestionIndex < totalQuestions - 1) {
       setCurrentQuestionIndex((prev) => prev + 1);
       setSelectedOptionIndex(null);
@@ -141,7 +148,6 @@ export default function MCQsPage() {
 
   return (
     <div className="min-h-screen w-full bg-black text-white flex flex-col items-center justify-center px-4 relative">
-      {/* Answer Popup */}
       {visible && (
         <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
           <div className="bg-gray-900 rounded-lg p-6 max-w-md w-full text-center border border-gray-700 shadow-2xl">
@@ -164,9 +170,8 @@ export default function MCQsPage() {
       {/* Header */}
       <div className="w-full mb-10 bg-gray-900 bg-opacity-75 backdrop-blur-sm p-4 flex items-center justify-between z-10">
         <span className="text-sm uppercase tracking-wide text-gray-300">
-          Offences Against Human Body
+          {topicId ? `Topic: ${topicId}` : "All Topics"}
         </span>
-
         <div className="flex flex-col w-full max-w-md mx-auto">
           <div className="w-full bg-gray-700 rounded-full h-2.5 mb-1">
             <div
@@ -181,12 +186,10 @@ export default function MCQsPage() {
             <span>{progressPercentage.toFixed(0)}% complete</span>
           </div>
         </div>
-
         <div className="flex items-center space-x-4">
           <span className="text-gray-400 flex items-center">
             ⏱ {formatTime(secondsElapsed)}
           </span>
-
           <select
             value={selectedMark}
             onChange={(e) => setSelectedMark(Number(e.target.value))}
@@ -198,7 +201,6 @@ export default function MCQsPage() {
               </option>
             ))}
           </select>
-
           <select
             value={selectedNegativeMark}
             onChange={(e) => setSelectedNegativeMark(Number(e.target.value))}
@@ -277,7 +279,7 @@ export default function MCQsPage() {
 
           <button
             onClick={handleNextQuestions}
-            disabled={loading || error !== null || questions.length === 0}
+            disabled={loading || !!error || questions.length === 0}
             className="px-6 py-2 rounded-full bg-gradient-to-r from-orange-400 to-red-600 text-white font-semibold"
           >
             {currentQuestionIndex === totalQuestions - 1 ? "RESULT" : "NEXT"}
@@ -302,8 +304,8 @@ export default function MCQsPage() {
               Final Score: {score.toFixed(2)}
             </p>
             <button
-              className="mt-4 px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded"
               onClick={() => setShowResult(false)}
+              className="mt-4 px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded"
             >
               Close
             </button>

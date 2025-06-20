@@ -1,179 +1,65 @@
 import React from "react";
 import { Link } from "./ui/Link";
 import { Facebook, Instagram, Youtube, Linkedin } from "lucide-react";
+import Image from "next/image";
 
 const Footer: React.FC = () => {
   return (
     <footer className="bg-black text-white py-16 text-center">
       <div className="container mx-auto px-4 font-poppins">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12 text-center">
-          {/* For Traders */}
-          <div>
-            <h3 className="text-xl font-bold mb-4">For Traders</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  href="/trading-mastermind"
-                  className="text-gray-400 hover:text-gold-500"
-                >
-                  Trading Mastermind
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/futures-options"
-                  className="text-gray-400 hover:text-gold-500"
-                >
-                  Futures & Options Blueprint
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/trading-strategies"
-                  className="text-gray-400 hover:text-gold-500"
-                >
-                  51 Trading Strategies
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* For Investors */}
-          <div>
-            <h3 className="text-xl font-bold mb-4">For Investors</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  href="/money-smart"
-                  className="text-gray-400 hover:text-gold-500"
-                >
-                  Money Smart in your 20s & 30s
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/stock-investing"
-                  className="text-gray-400 hover:text-gold-500"
-                >
-                  Stock Investing Mastermind
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* For Finance Students */}
-          <div>
-            <h3 className="text-xl font-bold mb-4">For Finance Students</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  href="/financial-modeling"
-                  className="text-gray-400 hover:text-gold-500"
-                >
-                  Financial Modeling Handbook
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/financial-statement"
-                  className="text-gray-400 hover:text-gold-500"
-                >
-                  Financial Statement Analysis Handbook
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* For Entrepreneurs */}
-          <div>
-            <h3 className="text-xl font-bold mb-4">For Entrepreneurs</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  href="/industry-handbook"
-                  className="text-gray-400 hover:text-gold-500"
-                >
-                  The Industry Handbook
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/fundraising"
-                  className="text-gray-400 hover:text-gold-500"
-                >
-                  Fundraising Decoded
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/startup-finance"
-                  className="text-gray-400 hover:text-gold-500"
-                >
-                  Startup Finance 360
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
 
         {/* Secondary Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12 text-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12 text-left">
           {/* For Authors */}
           <div>
-            <h3 className="text-xl font-bold mb-4">For Authors</h3>
+            <h3 className="text-xl font-bold mb-4">Overviews</h3>
             <ul className="space-y-2">
               <li>
                 <Link
-                  href="/break-career-code"
+                  href="/refund"
                   className="text-gray-400 hover:text-gold-500"
                 >
-                  Break the Career Code
+                  Refund Policy
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/banking-career"
+                  href="/terms"
                   className="text-gray-400 hover:text-gold-500"
                 >
-                  The Banking Career Playbook
+                  Terms and Conditions
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/bookpreneur"
+                  href="/privacy"
                   className="text-gray-400 hover:text-gold-500"
                 >
-                  The BookPreneur
+                  Privacy Policy
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/interview-ready"
+                  href="/contact"
                   className="text-gray-400 hover:text-gold-500"
                 >
-                  Interview Ready
+                  Contact us
                 </Link>
               </li>
             </ul>
-            <Link
-              href="/shop"
-              className="inline-block mt-4 text-gold-500 hover:text-gold-400"
-            >
-              Shop Products →
-            </Link>
           </div>
 
           {/* Business Books */}
           <div>
-            <h3 className="text-xl font-bold mb-4">Business Books</h3>
+            <h3 className="text-xl font-bold mb-4">Intangible products</h3>
             <ul className="space-y-2">
               <li>
                 <Link
                   href="/mindful-marketing"
                   className="text-gray-400 hover:text-gold-500"
                 >
-                  Mindful Marketing
+                  State Judiciary prelims PYQ
                 </Link>
               </li>
               <li>
@@ -181,7 +67,32 @@ const Footer: React.FC = () => {
                   href="/hiring-mastermind"
                   className="text-gray-400 hover:text-gold-500"
                 >
-                  Hiring Mastermind
+                  CLAT UG PYQ
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/hiring-mastermind"
+                  className="text-gray-400 hover:text-gold-500"
+                >
+                  CLAT PG PYQ
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/law-notes"
+                  className="text-gray-400 hover:text-gold-500"
+                >
+                  Law notes
+                </Link>
+              </li>
+
+              <li>
+                <Link
+                  href="/hiring-mastermind"
+                  className="text-gray-400 hover:text-gold-500"
+                >
+                  Semester exams PYQ
                 </Link>
               </li>
             </ul>
@@ -189,14 +100,14 @@ const Footer: React.FC = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-xl font-bold mb-4">Quick Links</h3>
+            <h3 className="text-xl font-bold mb-4">Flagship Products</h3>
             <ul className="space-y-2">
               <li>
                 <Link
                   href="/books-courses"
                   className="text-gray-400 hover:text-gold-500"
                 >
-                  Books & Courses
+                  Learn sections
                 </Link>
               </li>
               <li>
@@ -204,7 +115,7 @@ const Footer: React.FC = () => {
                   href="/schools"
                   className="text-gray-400 hover:text-gold-500"
                 >
-                  Schools
+                  Learn essentials
                 </Link>
               </li>
               <li>
@@ -220,31 +131,7 @@ const Footer: React.FC = () => {
                   href="/partnerships"
                   className="text-gray-400 hover:text-gold-500"
                 >
-                  Partnerships & Collaborations
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/login"
-                  className="text-gray-400 hover:text-gold-500"
-                >
-                  Login
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/personality"
-                  className="text-gray-400 hover:text-gold-500"
-                >
-                  Know your personality
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/sitemap"
-                  className="text-gray-400 hover:text-gold-500"
-                >
-                  Sitemap
+                  Legal Skills
                 </Link>
               </li>
             </ul>
@@ -252,11 +139,11 @@ const Footer: React.FC = () => {
 
           {/* Company */}
           <div>
-            <h3 className="text-xl font-bold mb-4">Company</h3>
+            <h3 className="text-xl font-bold mb-4">Syllabus</h3>
             <ul className="space-y-2">
               <li>
                 <Link href="/" className="text-gray-400 hover:text-gold-500">
-                  Home
+                  PCS(J)
                 </Link>
               </li>
               <li>
@@ -264,40 +151,7 @@ const Footer: React.FC = () => {
                   href="/about-us"
                   className="text-gray-400 hover:text-gold-500"
                 >
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contact"
-                  className="text-gray-400 hover:text-gold-500"
-                >
-                  Contact Us
-                </Link>
-              </li>
-
-              <li>
-                <Link
-                  href="/terms"
-                  className="text-gray-400 hover:text-gold-500"
-                >
-                  Terms & Conditions
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/refund"
-                  className="text-gray-400 hover:text-gold-500"
-                >
-                  Refund Policy
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contact"
-                  className="text-gray-400 hover:text-gold-500"
-                >
-                  Help & Support
+                  APO
                 </Link>
               </li>
             </ul>
@@ -316,7 +170,7 @@ const Footer: React.FC = () => {
                 <Facebook size={24} />
               </Link>
               <Link
-                href="https://instagram.com"
+                href="https://www.instagram.com/the_law_classroom"
                 className="text-gray-400 hover:text-gold-500"
               >
                 <Instagram size={24} />
@@ -334,26 +188,23 @@ const Footer: React.FC = () => {
                 <Linkedin size={24} />
               </Link>
             </div>
-
-            {/* Logo */}
             <div>
-              <Link href="/" className="text-2xl font-serif font-bold">
-                THE<span className="text-gold-500">LAW</span>CLASSROOMS
-              </Link>
+              <p>&copy; 2025 The Law Classrooms. All rights reserved.</p>
             </div>
-
-            {/* Legal Links */}
-            <div className="flex justify-center space-x-4">
-              <Link href="/terms" className="text-gray-400 hover:text-gold-500">
-                TERMS & CONDITIONS
-              </Link>
-              <Link
-                href="/privacy"
-                className="text-gray-400 hover:text-gold-500"
-              >
-                PRIVACY POLICY
-              </Link>
-            </div>
+            {/* Logo */}
+            <Link
+              href="/"
+              className="flex items-center gap-2 text-2xl font-poppins font-bold "
+            >
+              <Image
+                src="/logo.png" // 🔁 Replace with your actual image path
+                alt="Logo"
+                width={40}
+                height={40}
+                className="rounded-full" // Optional: use rounded-full if logo is circular
+              />
+              The Law Classrooms
+            </Link>
           </div>
         </div>
       </div>

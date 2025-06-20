@@ -1,28 +1,67 @@
+
 export default function RefundpolicyPage() {
   return (
-    <div className="max-w-4xl mx-auto px-4 py-10 text-gray-200">
-      <h1 className="text-3xl font-bold mb-4">Refund and Exchange Policy</h1>
+    <div className="min-h-screen bg-black text-white px-4 py-10">
+      <div className="max-w-2xl mx-auto bg-[#1e1e1e] rounded-md p-6">
+        <div className="max-w-40 mb-4">
+          <img src="/legal/book.svg" alt="icons" />
+        </div>
 
-      <p className="mb-4">
-        When you purchase our digital products or services—such as sectional or
-        subject-wise test series, State Judiciary PYQ practice, Enotes, and
-        other offerings on our website—please note that your purchase is{" "}
-        <span className="font-semibold text-red-600">non-refundable</span>.
-      </p>
+        <h1 className="text-4xl font-extrabold mb-6 border-b border-gray-600 pb-2">
+          Refund Policy
+        </h1>
 
-      <p className="mb-4">
-        Similarly, if you buy any online batch or service, the payment made is
-        <span className="font-semibold text-red-600"> non-refundable</span>{" "}
-        under all circumstances.
-      </p>
+        <p className="mb-4 text-gray-300 font-semibold">
+          Returns and Refunds Policy
+        </p>
 
-      <p className="mb-4">
-        However, in the event that you accidentally purchase a batch or service,
-        you may request a change to another batch or service of the
-        <span className="font-semibold"> same amount</span>. This request must
-        be made within
-        <span className="font-semibold"> 10 days</span> of the purchase date.
-      </p>
+        <p className="mb-4 text-gray-300">
+          <strong>Non-tangible irrevocable goods</strong> (“Digital Products”
+          and “Virtual Coins”)
+        </p>
+
+        <p className="mb-4 text-gray-300">
+          We do not issue refunds for non-tangible irrevocable goods, including
+          virtual coins and digital products, once a purchase is confirmed and
+          the virtual coins are credited to your account.
+        </p>
+
+        <p className="mb-4 text-gray-300">
+          However, if the user has not used any of the purchased coins, we offer
+          a full refund within 24 hours of the coin purchase. The refund request
+          must be made within this 24-hour window, and <strong>none</strong> of
+          the coins should have been used.
+        </p>
+
+        <p className="mb-4 text-gray-300">
+          Once any amount of coin is used, the transaction becomes
+          non-refundable.
+        </p>
+
+        <p className="mb-4 text-gray-300">
+          We recommend contacting us for assistance if you experience any issues
+          receiving your coins or using them to access products.
+        </p>
+
+        <p className="mb-4 text-gray-300 font-semibold">
+          Contact us for any issues:
+        </p>
+
+        <p className="mb-4 text-gray-300">
+          If you have any questions about our Returns and Refunds Policy, please
+          contact us:
+        </p>
+
+        <p className="text-gray-300">
+          — By email:{" "}
+          <a
+            href="mailto:info.thelawclassroom@gmail.com"
+            className="underline text-blue-400"
+          >
+            info.thelawclassroom@gmail.com
+          </a>
+        </p>
+      </div>
     </div>
   );
 }

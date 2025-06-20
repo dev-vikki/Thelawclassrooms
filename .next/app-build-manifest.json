@@ -12,30 +12,25 @@
       "static/css/app/page.css",
       "static/chunks/app/page.js"
     ],
-    "/contact/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/contact/page.js"
-    ],
-    "/schools/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/schools/page.js"
-    ],
     "/semester/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/semester/page.js"
     ],
-    "/syllabus/page": [
+    "/dashboard/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/syllabus/page.js"
+      "static/chunks/app/dashboard/layout.js"
     ],
-    "/performance/page": [
+    "/dashboard/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/performance/page.js"
+      "static/chunks/app/dashboard/page.js"
+    ],
+    "/dashboard/state-pyqs/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/dashboard/state-pyqs/page.js"
     ]
   }
 }

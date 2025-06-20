@@ -1,7 +1,6 @@
 {
   "/page": "app/page.js",
-  "/contact/page": "app/contact/page.js",
   "/semester/page": "app/semester/page.js",
-  "/syllabus/page": "app/syllabus/page.js",
-  "/performance/page": "app/performance/page.js"
+  "/dashboard/page": "app/dashboard/page.js",
+  "/dashboard/state-pyqs/page": "app/dashboard/state-pyqs/page.js"
 }

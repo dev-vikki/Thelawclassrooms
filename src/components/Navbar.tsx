@@ -10,6 +10,7 @@ import {
   Phone,
   ChevronDown,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useAuth } from "@/lib/useAuth";
 import { usePathname } from "next/navigation";
@@ -30,8 +31,8 @@ const NavItem = ({ href, icon, label }: NavItemProps) => {
       className={`flex items-center space-x-2 px-3 py-2 rounded-md transition-colors
         ${
           isActive
-            ? "text-gold-400 bg-navy-800"
-            : "text-white hover:text-gold-400 hover:bg-navy-800"
+            ? "text-gray-300 bg-[#1c1c1c]"
+            : "text-gray-300 hover:bg-[#1c1c1c]"
         }
       `}
     >
@@ -78,9 +79,12 @@ const Navbar: React.FC = () => {
           {/* Logo */}
           <div className="flex items-center space-x-2">
             <Link href="/" className="flex items-center space-x-2">
-              <img
+              {/* Image component from next/image is preferred for optimization */}
+              <Image
                 src="/logo.png"
                 alt="Logo"
+                width={80}
+                height={60}
                 className="object-contain w-[35px] h-[35px] md:w-[80px] md:h-[60px]"
               />
               <span className="font-light">
@@ -91,24 +95,19 @@ const Navbar: React.FC = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center">
-            <NavItem href="/" icon={<BookOpen size={12} />} label="Home" />
-            <NavItem
-              href="/books"
-              icon={<BookOpen size={12} />}
-              label="MCQ Corner"
-            />
+            <NavItem href="/" label="Home" />
+            <NavItem href="/books" label="MCQ Corner" />
 
             <div className="relative group">
               <button
                 onClick={toggleLawzzle}
-                className={`flex items-center space-x-2 px-3 py-2 border rounded-md transition-colors
+                className={`flex items-center space-x-2 px-3 py-2  rounded-md transition-colors
                 ${
                   pathname.startsWith("/lawzzle")
-                    ? "text-gold-400 bg-navy-800"
-                    : "hover:text-gold-400 hover:bg-navy-800"
+                    ? "text-gray-300 hover:bg-[#1c1c1c]"
+                    : "text-gray-300 hover:bg-[#1c1c1c]"
                 }`}
               >
-                <GraduationCap size={12} />
                 <span>Lawzzle</span>
                 <ChevronDown size={16} />
               </button>
@@ -118,7 +117,7 @@ const Navbar: React.FC = () => {
                     href="/lawzzle/learnsections"
                     className={`block px-4 py-2 hover:bg-navy-700 ${
                       pathname === "/lawzzle/learnsections"
-                        ? "bg-navy-700 text-gold-400"
+                        ? "bg-navy-700 text-[#1c1c1c]"
                         : ""
                     }`}
                   >
@@ -128,7 +127,7 @@ const Navbar: React.FC = () => {
                     href="/lawzzle/learnessentials"
                     className={`block px-4 py-2 hover:bg-navy-700 ${
                       pathname === "/lawzzle/learnessentials"
-                        ? "bg-navy-700 text-gold-400"
+                        ? "bg-[#1c1c1c] text-[#acabbe]"
                         : ""
                     }`}
                   >
@@ -138,11 +137,7 @@ const Navbar: React.FC = () => {
               )}
             </div>
 
-            <NavItem
-              href="/schools"
-              icon={<School size={12} />}
-              label="Law Notes"
-            />
+            <NavItem href="/schools" label="Law Notes" />
             <NavItem href="/semester" label="Semester" />
             <NavItem href="/syllabus" label="Syllabus" />
           </div>
@@ -151,7 +146,7 @@ const Navbar: React.FC = () => {
           <div className="hidden md:flex items-center space-x-4">
             <Link
               href="/internship"
-              className="relative border-light-effect px-4 py-2 rounded text-white bg-transparent transition-all"
+              className="relative  px-4 py-2 rounded text-white bg-transparent transition-all"
             >
               Internship
             </Link>
@@ -187,7 +182,7 @@ const Navbar: React.FC = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4 bg-navy-800 rounded-lg p-4 animate-fadeIn">
+          <div className="md:hidden mt-4 bg-   rounded-lg p-4 animate-fadeIn">
             <div className="flex flex-col space-y-4">
               <MobileNavItem
                 href="/"
@@ -202,7 +197,7 @@ const Navbar: React.FC = () => {
               <div>
                 <button
                   onClick={toggleLawzzle}
-                  className="flex items-center space-x-2 text-left w-full hover:text-gold-400"
+                  className="flex items-center space-x-2 text-left w-full hover:text-gray-400"
                 >
                   <GraduationCap size={12} />
                   <span>Lawzzle</span>

@@ -20,12 +20,12 @@ const Hero: React.FC = () => {
         <div className="absolute inset-0 z-10 flex items-center px-6 sm:px-12">
           <div className="max-w-xl">
             <h1
-              className={`${oswald.className} text-5xl sm:text-7xl md:text-8xl font-extrabold leading-tight text-white whitespace-nowrap`}
+              className={`${oswald.className} text-5xl sm:text-7xl md:text-6xl font-extrabold leading-tight text-white whitespace-nowrap`}
             >
               Build a memory for
             </h1>
             <h2
-              className={`${oswald.className} text-4xl sm:text-8xl font-extrabold leading-tight mt-2`}
+              className={`${oswald.className} text-4xl sm:text-6xl font-extrabold leading-tight mt-2`}
             >
               <span className="bg-gradient-to-r from-[#ff6600] to-[#ffcc00] bg-clip-text text-transparent">
                 Law that lasts
