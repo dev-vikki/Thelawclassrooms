@@ -1,6 +1,3 @@
 {
-  "/page": "app/page.js",
-  "/semester/page": "app/semester/page.js",
-  "/dashboard/page": "app/dashboard/page.js",
-  "/dashboard/state-pyqs/page": "app/dashboard/state-pyqs/page.js"
+  "/page": "app/page.js"
 }
